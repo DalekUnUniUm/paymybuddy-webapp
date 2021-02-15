@@ -14,10 +14,13 @@ public class PorteMonnaieProxy {
     @Autowired
     private CustomProperties customProperties ;
 
+    private RestTemplate restTemplate ;
+    private String reponse ;
+
     public PorteMonnaie createPorteMonnaie(PorteMonnaie p){
         String createPorteMonnaieUrl = customProperties.getApiUrl()+"/wallet" ;
 
-        RestTemplate restTemplate = new RestTemplate();
+        restTemplate = new RestTemplate();
         HttpEntity<PorteMonnaie> request = new HttpEntity<PorteMonnaie>(p) ;
         ResponseEntity<PorteMonnaie> response = restTemplate.exchange(
                 createPorteMonnaieUrl,
@@ -27,5 +30,26 @@ public class PorteMonnaieProxy {
         );
 
         return response.getBody();
+    }
+
+    public String mySolde(int utilisateurId){
+
+        String getMySoldeUrl = customProperties.getApiUrl() + "/wallet/soldes?soldesId=" + utilisateurId ;
+        restTemplate = new RestTemplate();
+        reponse = restTemplate.getForObject(getMySoldeUrl, String.class);
+
+        return reponse ;
+    }
+
+    public void addSoldes(int sommes, int utilisateurSoldesId){
+        String addSoldeUrl = customProperties.getApiUrl() + "/wallet/updateSoldesAdd?addSoldes="+sommes+"&soldesId="+utilisateurSoldesId ;
+        restTemplate = new RestTemplate();
+        restTemplate.put(addSoldeUrl, String.class);
+    }
+
+    public void soustractSoldes(int sommes, int utilisateurSoldesId){
+        String soustractSoldeUrl = customProperties.getApiUrl() + "/wallet/updateSoldesSoustract?soustractSoldes="+sommes+"&soldesId="+utilisateurSoldesId ;
+        restTemplate = new RestTemplate();
+        restTemplate.put(soustractSoldeUrl, String.class);
     }
 }

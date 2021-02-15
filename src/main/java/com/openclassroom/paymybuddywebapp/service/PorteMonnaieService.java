@@ -19,4 +19,16 @@ public class PorteMonnaieService {
         return savedPorteMonnaie ;
     }
 
+    public String mySolde(int utilisateurId){
+        return porteMonnaieProxy.mySolde(utilisateurId);
+    }
+
+    public void addSoldes(int sommes, int utilisateurSoldesId){
+        porteMonnaieProxy.addSoldes(sommes, utilisateurSoldesId);
+    }
+
+    public void soustractSoldes(int sommes, int utilisateurSoldesId){
+        porteMonnaieProxy.soustractSoldes(sommes, utilisateurSoldesId);
+    }
+
 }

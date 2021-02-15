@@ -32,6 +32,8 @@ public class LoginController {
     public String login(@CookieValue(value = "utilisateurId", defaultValue = "null") String utilisateurId, Model model){
         utilisateur = new Utilisateur();
         model.addAttribute("utilisateur", utilisateur);
+        if(!utilisateurId.equals("null"))
+            return "/home" ;
 
         return "login" ;
     }

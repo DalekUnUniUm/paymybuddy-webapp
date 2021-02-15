@@ -11,5 +11,30 @@
 <body>
 <div th:replace="fragments/header :: header">
 </div>
+<div style="max-width: 800px; margin: 0 auto ;">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white;">
+        <a class="navbar-brand" href="#">Send Money</a>
+        <div class="collapse navbar-collapse w-100 order-3 dual-collapse2" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <button class="btn btn-primary" type="submit">Add Connection</button>
+            </ul>
+        </div>
+    </nav>
+    <span th:if="${logError != null}" class="error" style="color: RED ;">Soldes insuffisant</span>
+    <span th:if="${logSuccess != null}" class="error" style="color: GREEN ;">Transfer effectué avec succès</span>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center" style="height:150px;">
+        <form method="post" th:action="@{/transfer}" th:object="${historiqueTransaction}">
+            <select name="Connection" id="connection" th:field="*{firstName}" style="height:35px;  margin-right:10px ;">
+                <option value="">Select A connection</option>
+                <tr th:each="friend: ${friends}">
+                    <option th:text="${friend}" th:value="${friend}"></option>
+                </tr>
+            </select>
+            <input type = "text" name = "description" id = "description" th:field="*{description}" value="Description" style="width: 250px ; height: 35px; margin-right:10px ;"></input>
+            <input type = "number" id="montant" name = "montant" value = "0" th:field="*{amount}" style="width: 75px ; height: 35px; margin-right:10px ;">
+            <button class="btn btn-primary" type="submit" style="width: 100px ; height: 35px; border: none; background-color: #62b85a;">Pay</button>
+        </form>
+    </nav>
+</div>
 </body>
 </html>
