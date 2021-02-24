@@ -2,9 +2,8 @@ package com.openclassroom.paymybuddywebapp.controller;
 
 import com.openclassroom.paymybuddywebapp.model.PorteMonnaie;
 import com.openclassroom.paymybuddywebapp.model.Utilisateur;
-import com.openclassroom.paymybuddywebapp.service.GenericRequestService;
 import com.openclassroom.paymybuddywebapp.service.PorteMonnaieService;
-import com.openclassroom.paymybuddywebapp.service.RegisterService;
+import com.openclassroom.paymybuddywebapp.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +18,11 @@ public class RegisterController {
     @Autowired
     private Utilisateur utilisateur ;
     @Autowired
+    private UtilisateurService utilisateurService ;
+
     private PorteMonnaie porteMonnaie ;
     @Autowired
-    private RegisterService registerService ;
-    @Autowired
     private PorteMonnaieService porteMonnaieService ;
-    @Autowired
-    private GenericRequestService genericRequestService ;
 
     @GetMapping("/register")
     public String register(Model model){
@@ -37,7 +34,7 @@ public class RegisterController {
     @PostMapping("/register")
     public ModelAndView saveUser(@ModelAttribute Utilisateur utilisateur, Model model){
 
-        if(genericRequestService.userExist(utilisateur.getMail()) != null){
+        if(utilisateurService.userExist(utilisateur.getMail()) != null){
             model.addAttribute("logError", "logError");
             return new ModelAndView("/register");
         }
@@ -47,7 +44,7 @@ public class RegisterController {
 
         porteMonnaieService.savePorteMonnaie(porteMonnaie);
         /**Enregistrement de l'utilisateur**/
-        registerService.saveUser(utilisateur);
+        utilisateurService.saveUser(utilisateur);
         return new ModelAndView("redirect:/login");
     }
 }

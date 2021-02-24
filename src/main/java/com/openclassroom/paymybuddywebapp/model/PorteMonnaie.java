@@ -13,6 +13,8 @@ public class PorteMonnaie {
 
     private boolean available ;
 
+    private int addOrSoustract ;
+
     public boolean isAvailable() {
         return available;
     }
@@ -21,11 +23,11 @@ public class PorteMonnaie {
         this.available = available;
     }
 
-    public int getSoldes() {
-        return soldes;
-    }
-
     public void setSoldes(int soldes) {
         this.soldes = soldes;
+    }
+
+    public int getAddOrSoustract() {
+        return addOrSoustract;
     }
 }
