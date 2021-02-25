@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sf="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+      lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <title>Profil</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous" />
+</head>
+<body>
+<div th:replace="fragments/header :: header">
+</div>
+<div style="max-width: 800px; margin: 0 auto ;">
+    <div style="background-color:#edeae1; border: 1px solid ;">
+        <h4 class="container-fluid text-center">Informations soldes</h4>
+        <tr th:each="portemonnaie: ${porteMonnaie}">
+            <p style="margin-left:5px ;">Votre soldes : <span th:text="${portemonnaie.soldes}"></span> €</p>
+            <p style="margin-left:5px ;">Add money from your bank account</p>
+            <form method="post" th:action="@{/addmoney}" th:object="${porteMonnaie}">
+                <input style="margin-left:5px ;" type="number" th:field="*{addOrSoustract}">
+                <button class="btn btn-primary" style="background-color: #62b85a; border: none;">Validate</button>
+            </form>
+            <p style="margin-top:20px; margin-left:5px ;">Add money to your bank account</p>
+            <form method="post" th:action="@{/addmoneytobank}" th:object="${porteMonnaie}">
+                <input style="margin-left:5px ;" type="number" th:field="*{addOrSoustract}">
+                <button class="btn btn-primary" style="background-color: #62b85a; border: none;" >Validate</button>
+            </form>
+        </tr>
+    </div>
+    <div style="background-color:#edeae1; border: 1px solid ; margin-top:15px;">
+        <h4 class="container-fluid text-center" style="margin-top:25px;">Informations personnelles</h4>
+
+        <tr th:each="utilisateur: ${utilisateurs}">
+            <p style="margin-left:5px ;">E-mail     : <span th:text="${utilisateur.mail}"></span></p>
+            <p style="margin-left:5px ;">Last name  : <span th:text="${utilisateur.lastName}"></span></p>
+            <p style="margin-left:5px ;">First name : <span th:text="${utilisateur.firstName}"></span></p>
+        </tr>
+    </div>
+    <div style="background-color:#edeae1; border: 1px solid ; margin-top:15px;" >
+        <h4 class="container-fluid text-center" style="margin-top:25px;">My Pay My Buddy Connections</h4>
+        <p style="margin-left:5px ;">Liste amis: </p>
+        <tr th:each="listfriend: ${listFriends}">
+            <p style="margin-left:5px ;"><span th:text="${listfriend}"></span></p>
+        </tr>
+        <a style="margin-left:5px ;" href="reseau"><button class="btn btn-primary" type="submit">Add Connection</button></a>
+        <p></p>
+    </div>
+
+</div>
+</body>
+</html>

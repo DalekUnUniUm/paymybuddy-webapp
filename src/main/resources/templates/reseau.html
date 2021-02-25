@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sf="http://www.w3.org/1999/xhtml" lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous" />
+</head>
+<body>
+<div th:replace="fragments/header :: header">
+</div>
+<div style="max-width: 800px; margin: 0 auto ;">
+    <div class="container-fluid text-center">
+        <span th:if="${logError != null}" class="error" style="color: RED ;">Email doesn't exist !</span>
+        <span th:if="${logError2 != null}" class="error" style="color: RED ;">You are already friends</span>
+        To add a friend, enter his email adress:
+        <form method="post" th:action="@{/reseau}" th:object="${reseau}">
+            <input type="text" name = "addfriend" value="addfriend" th:field="*{mail}">
+            <button class="btn btn-primary" type="submit" style="width: 100px ; height: 35px; border: none; background-color: #62b85a;">Add Friend</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

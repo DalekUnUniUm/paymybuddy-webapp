@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sf="http://www.w3.org/1999/xhtml" lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous" />
+</head>
+<body>
+<div th:replace="fragments/header :: header">
+</div>
+<div style="max-width: 800px; margin: 0 auto ;">
+    <div class="container-fluid text-center">
+        <p>Any problem ? Please contact us</p>
+        <form method="post" th:action="@{/contact}" th:object="${contact}">
+            <p>First Name</p>
+            <input type="text" required th:field="*{firstName}">
+            <p style="margin-top:10px;">E-mail</p>
+            <input type="text" required th:field="*{email}">
+            <p style="margin-top:10px;">What is your problem ?</p>
+            <textarea required th:field="*{problem}">
+
+            </textarea>
+            <br>
+            <button class="btn btn-primary" style="background-color: #62b85a; border: none; margin-top:10px;" >Validate</button>
+        </form>
+    </div>
+</body>
+</html>
