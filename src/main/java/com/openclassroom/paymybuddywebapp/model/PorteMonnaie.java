@@ -9,9 +9,11 @@ public class PorteMonnaie {
 
     private int porteMonnaieId ;
 
-    private int soldes ;
+    private double soldes ;
 
     private boolean available ;
+
+    private String bankAccount ;
 
     private int addOrSoustract ;
 
@@ -23,11 +25,15 @@ public class PorteMonnaie {
         this.available = available;
     }
 
-    public void setSoldes(int soldes) {
+    public void setSoldes(double soldes) {
         this.soldes = soldes;
     }
 
     public int getAddOrSoustract() {
         return addOrSoustract;
+    }
+
+    public String getBankAccount() {
+        return bankAccount;
     }
 }

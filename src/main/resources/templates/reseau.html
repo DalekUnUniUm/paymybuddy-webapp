@@ -12,7 +12,7 @@
 <div th:replace="fragments/header :: header">
 </div>
 <div style="max-width: 800px; margin: 0 auto ;">
-    <div class="container-fluid text-center">
+    <div class="container-fluid text-center" style="position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
         <span th:if="${logError != null}" class="error" style="color: RED ;">Email doesn't exist !</span>
         <span th:if="${logError2 != null}" class="error" style="color: RED ;">You are already friends</span>
         To add a friend, enter his email adress:

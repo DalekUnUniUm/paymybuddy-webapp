@@ -34,7 +34,7 @@ public class ProfilControlleur {
         porteMonnaie = new PorteMonnaie();
         utilisateur = new Utilisateur();
         utilisateur = utilisateurService.getUtilisateur(Integer.valueOf(utilisateurId));
-        porteMonnaie.setSoldes(Integer.valueOf(porteMonnaieService.mySolde(Integer.valueOf(utilisateurId))));
+        porteMonnaie.setSoldes(Double.valueOf(porteMonnaieService.mySolde(Integer.valueOf(utilisateurId))));
         listFriend = reseauService.listFriendId(utilisateur.getUtilisateur_id());
         model.addAttribute("porteMonnaie",porteMonnaie);
         model.addAttribute("utilisateurs",utilisateur);
@@ -43,16 +43,27 @@ public class ProfilControlleur {
     }
 
     @RequestMapping(value = "/addmoney", method = RequestMethod.POST)
-    public String addMoney(@ModelAttribute("addmoney") PorteMonnaie porteMonnaie){
+    public String addMoney(@ModelAttribute("addmoney") PorteMonnaie porteMonnaie, Model model){
         System.out.println("Sommes = " + porteMonnaie.getAddOrSoustract());
+        System.out.println("bankaccount = " + porteMonnaieService.getBankAccount(utilisateur.getSoldesId()));
+        if(porteMonnaieService.getBankAccount(utilisateur.getSoldesId()).equals("0")){
+            model.addAttribute("logError", "logError");
+            System.out.println("Link a bank account !");
+            return "redirect:/profil" ;
+        }
         porteMonnaieService.addSoldes(porteMonnaie.getAddOrSoustract(), utilisateur.getSoldesId());
 
         return "redirect:/profil" ;
     }
 
     @RequestMapping(value = "/addmoneytobank", method = RequestMethod.POST)
-    public String addMoneyToBank(@ModelAttribute("addmoneytobank") PorteMonnaie porteMonnaie){
+    public String addMoneyToBank(@ModelAttribute("addmoneytobank") PorteMonnaie porteMonnaie, Model model){
         System.out.println("Sommes = " + porteMonnaie.getAddOrSoustract());
+        if(porteMonnaieService.getBankAccount(utilisateur.getSoldesId()).equals("0")){
+            model.addAttribute("logError", "logError");
+            System.out.println("Link a bank account !");
+            return "redirect:/profil" ;
+        }
         porteMonnaieService.soustractSoldes(porteMonnaie.getAddOrSoustract(), utilisateur.getSoldesId());
 
         return "redirect:/profil" ;

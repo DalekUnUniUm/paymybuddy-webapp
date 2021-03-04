@@ -26,6 +26,8 @@ public class LoginController {
     @GetMapping("/login")
     public String login(@CookieValue(value = "utilisateurId", defaultValue = "null") String utilisateurId, Model model){
         utilisateur = new Utilisateur();
+        utilisateur.setRememberMe(false);
+        model.addAttribute("rememberme",utilisateur.getRememberMe());
         model.addAttribute("utilisateur", utilisateur);
         if(!utilisateurId.equals("null"))
             return "/home" ;
@@ -36,6 +38,8 @@ public class LoginController {
     @PostMapping("/login")
     public ModelAndView verifiedLogin(@ModelAttribute Utilisateur utilisateur, Model model, HttpServletResponse response){
 
+        System.out.println("checked = " + utilisateur.getRememberMe());
+
         if(utilisateurService.userExist(utilisateur.getMail()) == null){
             model.addAttribute("logError", "logError");
             return new ModelAndView("/login") ;
@@ -45,9 +49,13 @@ public class LoginController {
             model.addAttribute("logError", "logError");
             return new ModelAndView("/login") ;
         }
-        Cookie cookie = new Cookie("utilisateurId", getId);
-        cookie.setMaxAge(7 * 24 * 60 * 60);
-        response.addCookie(cookie);
+
+        if(utilisateur.getRememberMe() == false){
+            Cookie cookie = new Cookie("utilisateurId", getId);
+            cookie.setMaxAge(7 * 24 * 60 * 60);
+            response.addCookie(cookie);
+        }
+
 
         return new ModelAndView("/home") ;
     }

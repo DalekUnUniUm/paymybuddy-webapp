@@ -19,6 +19,8 @@ public class Utilisateur {
 
     private int soldesId ;
 
+    private boolean rememberMe ;
+
     public String getMail() {
         return mail;
     }
@@ -35,5 +37,13 @@ public class Utilisateur {
 
     public int getSoldesId() {
         return soldesId;
+    }
+
+    public boolean getRememberMe() {
+        return rememberMe;
+    }
+
+    public void setRememberMe(boolean rememberMe) {
+        this.rememberMe = rememberMe;
     }
 }

@@ -31,7 +31,18 @@ public class PorteMonnaieProxy {
 
         return response.getBody();
     }
+    public String getBankAccount(int utilisateurSoldesId){
+        String getBankAccUrl = customProperties.getApiUrl() + "/wallet/getBankAccount?soldesId="+utilisateurSoldesId ;
+        restTemplate = new RestTemplate();
+        reponse = restTemplate.getForObject(getBankAccUrl, String.class);
+        return reponse ;
+    }
 
+    public void updateBankAccount(String bankAccount, int utilisateurSoldesId){
+        String addSoldeUrl = customProperties.getApiUrl() + "/wallet/bankaccount?bankaccount="+bankAccount+"&soldesId="+utilisateurSoldesId ;
+        restTemplate = new RestTemplate();
+        restTemplate.put(addSoldeUrl, String.class);
+    }
     public String mySolde(int utilisateurId){
 
         String getMySoldeUrl = customProperties.getApiUrl() + "/wallet/soldes?soldesId=" + utilisateurId ;

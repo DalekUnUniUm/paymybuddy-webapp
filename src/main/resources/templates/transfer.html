@@ -30,7 +30,7 @@
                     <option th:text="${friend}" th:value="${friend}"></option>
                 </tr>
             </select>
-            <input type = "text" name = "description" id = "description" th:field="*{description}" value="Description" style="width: 250px ; height: 35px; margin-right:10px ;">
+            <input type = "text" name = "description" id = "description" th:field="*{description}" value="Description" placeholder="Reason transfer" style="width: 250px ; height: 35px; margin-right:10px ;">
             <input type = "number" id="montant" name = "montant" value = "0" th:field="*{amount}" style="width: 75px ; height: 35px; margin-right:10px ;">
             <button class="btn btn-primary" type="submit" style="width: 100px ; height: 35px; border: none; background-color: #62b85a;">Pay</button>
         </form>

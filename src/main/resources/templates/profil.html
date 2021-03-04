@@ -14,10 +14,12 @@
 </div>
 <div style="max-width: 800px; margin: 0 auto ;">
     <div style="background-color:#edeae1; border: 1px solid ;">
-        <h4 class="container-fluid text-center">Informations soldes</h4>
+        <h4 class="container-fluid text-center">Wallet informations</h4>
+        <a style="margin-left:5px ; margin-top:5px;" href="bankaccount"><button class="btn btn-primary" type="submit">Link bank account</button></a>
         <tr th:each="portemonnaie: ${porteMonnaie}">
-            <p style="margin-left:5px ;">Votre soldes : <span th:text="${portemonnaie.soldes}"></span> €</p>
+            <p style="margin-left:5px ; margin-top:5px ;">Votre soldes : <span th:text="${portemonnaie.soldes}"></span> €</p>
             <p style="margin-left:5px ;">Add money from your bank account</p>
+            <span th:if="${logError != null}" class="error" style="color: RED ;">You have to link a bank account !</span>
             <form method="post" th:action="@{/addmoney}" th:object="${porteMonnaie}">
                 <input style="margin-left:5px ;" type="number" th:field="*{addOrSoustract}">
                 <button class="btn btn-primary" style="background-color: #62b85a; border: none;">Validate</button>
@@ -30,7 +32,7 @@
         </tr>
     </div>
     <div style="background-color:#edeae1; border: 1px solid ; margin-top:15px;">
-        <h4 class="container-fluid text-center" style="margin-top:25px;">Informations personnelles</h4>
+        <h4 class="container-fluid text-center" style="margin-top:25px;">Personnal informations</h4>
 
         <tr th:each="utilisateur: ${utilisateurs}">
             <p style="margin-left:5px ;">E-mail     : <span th:text="${utilisateur.mail}"></span></p>

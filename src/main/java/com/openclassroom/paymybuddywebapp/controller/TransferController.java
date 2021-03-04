@@ -45,6 +45,7 @@ public class TransferController {
 
     @GetMapping("/transfer")
     public String tranfer(@CookieValue("utilisateurId") String utilisateurId, Model model){
+
         utilisateur = utilisateurService.getUtilisateur(Integer.valueOf(utilisateurId));
         System.out.println("utilisateur = " + utilisateur);
         listFriend = reseauService.listFriendId(utilisateur.getUtilisateur_id());

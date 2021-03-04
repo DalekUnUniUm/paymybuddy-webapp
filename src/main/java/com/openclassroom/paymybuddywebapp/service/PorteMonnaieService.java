@@ -19,6 +19,13 @@ public class PorteMonnaieService {
         return savedPorteMonnaie ;
     }
 
+    public String getBankAccount(int utilisateurSoldesId){
+        return porteMonnaieProxy.getBankAccount(utilisateurSoldesId);
+    }
+
+    public void updateBankAccount(String bankAccount, int utilisateurSoldesId){
+        porteMonnaieProxy.updateBankAccount(bankAccount,utilisateurSoldesId);
+    }
     public String mySolde(int utilisateurId){
         return porteMonnaieProxy.mySolde(utilisateurId);
     }

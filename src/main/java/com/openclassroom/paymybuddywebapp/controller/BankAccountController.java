@@ -7,44 +7,45 @@ import com.openclassroom.paymybuddywebapp.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class RegisterController {
+public class BankAccountController {
+
+    @Autowired
+    private PorteMonnaie porteMonnaie ;
 
     @Autowired
     private Utilisateur utilisateur ;
+
     @Autowired
     private UtilisateurService utilisateurService ;
-    @Autowired
-    private PorteMonnaie porteMonnaie ;
+
     @Autowired
     private PorteMonnaieService porteMonnaieService ;
 
-    @GetMapping("/register")
-    public String register(Model model){
-        utilisateur = new Utilisateur();
-        model.addAttribute("utilisateur",utilisateur);
-        return "register" ;
+    @GetMapping("/bankaccount")
+    public String bankAccount(Model model){
+
+        model.addAttribute("portemonnaie", porteMonnaie);
+
+        return "bankaccount" ;
     }
 
-    @PostMapping("/register")
-    public ModelAndView saveUser(@ModelAttribute Utilisateur utilisateur, Model model){
+    @PostMapping("/bankaccount")
+    public String updateBankAccount(@ModelAttribute PorteMonnaie porteMonnaie,@CookieValue("utilisateurId") String utilisateurId){
 
-        if(utilisateurService.userExist(utilisateur.getMail()) != null){
-            model.addAttribute("logError", "logError");
-            return new ModelAndView("/register");
-        }
-        /**Création du porte Monnaie**/
-        porteMonnaie.setSoldes(0);
-        porteMonnaie.setAvailable(true);
+        utilisateur = utilisateurService.getUtilisateur(Integer.valueOf(utilisateurId));
+        System.out.println("bankaccount = " + porteMonnaie.getBankAccount());
+        System.out.println("soldeId = " + utilisateur.getSoldesId());
+        porteMonnaieService.updateBankAccount(porteMonnaie.getBankAccount(), utilisateur.getSoldesId());
 
-        porteMonnaieService.savePorteMonnaie(porteMonnaie);
-        /**Enregistrement de l'utilisateur**/
-        utilisateurService.saveUser(utilisateur);
-        return new ModelAndView("redirect:/login");
+        return "redirect:/profil";
+
     }
+
 }
