@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sf="http://www.w3.org/1999/xhtml" lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous" />
+</head>
+<body>
+<div th:replace="fragments/header :: header">
+</div>
+<div style="max-width: 800px; margin: 0 auto ;">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white;">
+        <a class="navbar-brand" href="#">Send Money</a>
+        <div class="collapse navbar-collapse w-100 order-3 dual-collapse2" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <a href="reseau"><button class="btn btn-primary" type="submit">Add Connection</button></a>
+            </ul>
+        </div>
+    </nav>
+    <span th:if="${logError != null}" class="error" style="color: RED ;">Insufficient credit</span>
+    <span th:if="${logSuccess != null}" class="error" style="color: GREEN ;">Transfer success</span>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center" style="height:150px;">
+        <form method="post" th:action="@{/transfer}" th:object="${historiqueTransaction}">
+            <select name="Connection" id="connection" th:field="*{firstName}" style="height:35px;  margin-right:10px ;">
+                <option value="">Select A connection</option>
+                <tr th:each="friend: ${friends}">
+                    <option th:text="${friend}" th:value="${friend}"></option>
+                </tr>
+            </select>
+            <input type = "text" name = "description" id = "description" th:field="*{description}" value="Description" placeholder="Reason transfer" style="width: 250px ; height: 35px; margin-right:10px ;">
+            <input type = "number" id="montant" name = "montant" value = "0" th:field="*{amount}" style="width: 75px ; height: 35px; margin-right:10px ;">
+            <button class="btn btn-primary" type="submit" style="width: 100px ; height: 35px; border: none; background-color: #62b85a;">Pay</button>
+        </form>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white;">
+        <a class="navbar-brand" href="#">My Transactions</a>
+    </nav>
+    <div class="" style="border: 1px solid ;">
+        <table>
+            <tr style="height:100px; background-color: #62b85a;">
+                <th style="width: 266px ; text-align:center; color: white ;">Connections</th>
+                <th style="width: 266px ; text-align:center; color: white ;">Description</th>
+                <th style="width: 266px ; text-align:center; color: white ;">Amount</th>
+            </tr>
+        </table>
+        <table>
+            <tr th:each="listhistorique: ${listhistoriques}" >
+                <td th:text="${listhistorique.firstName}" style="width: 266px ; text-align:center;  height:100px;"></td>
+                <td th:text="${listhistorique.description}" style="width: 266px ; text-align:center;  height:100px;"></td>
+                <td th:text="${listhistorique.amount}" style="width: 266px ; text-align:center;  height:100px;"></td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

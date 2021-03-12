@@ -9,12 +9,12 @@
           crossorigin="anonymous" />
 </head>
 <body>
-<div class="border border-secondary p-3 rounded" style="max-width: 410px; margin: 0 auto ;">
+<div class="border border-secondary p-3 rounded" style="max-width: 410px; margin: 0 auto ; position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
     <div class="container-fluid text-center">
         <div>
             <img class="img-fluid" th:src="@{/images/paymuddyloginlogo.png}" />
         </div>
-        <span th:if="${logError != null}" class="error" style="color: RED ;">Cette email existe déjà</span>
+        <span th:if="${logError != null}" class="error" style="color: RED ;">This email already taken</span>
         <form method="post" th:action="@{/register}" th:object="${utilisateur}" style="margin-top:10px ;">
             <p>
                 <input type="email" placeholder="E-mail" required autofocus th:field="*{mail}">
@@ -23,13 +23,13 @@
                 <input type="password" placeholder="Password" required th:field="*{password}">
             </p>
             <p>
-                <input type="text" placeholder="Prénom" required  th:field="*{firstName}">
+                <input type="text" placeholder="First Name" required  th:field="*{firstName}">
             </p>
             <p>
-                <input type="text" placeholder="Nom" required th:field="*{lastName}">
+                <input type="text" placeholder="Last Name" required th:field="*{lastName}">
             </p>
             <p>
-                <button type="submit" >S'enregistrer</button>
+                <button type="submit" >Register</button>
             </p>
         </form>
     </div>

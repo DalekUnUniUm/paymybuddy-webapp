@@ -1,9 +1,49 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sf="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sf="http://www.w3.org/1999/xhtml" lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 <head>
     <meta charset="UTF-8">
-    <title>Home page</title>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous" />
 </head>
 <body>
+<div th:replace="fragments/header :: header">
+</div>
+<div style="max-width: 800px; margin: 0 auto ;">
+    <div class="border border-secondary p-3 rounded" style="max-width: 380px; margin: 0 auto ;">
+        <h3>Welecome to paymybuddy</h3>
+    </div>
+    <table style="height:300px ; text-align:center; background-color: #62b85a; position: fixed; top:25%; left:50%; transform: translate(-50%, -25%);">
+        <tr>
+            <th style="width: 266px ; text-align:center; color: white ; border:1px solid black;">
+                Transfer <br/><br/>
+                Allow to transfer money to a friend<br/>
+                You just have to add friend to your connection<br/>
+                Then you transfer the money<br/><br/>
+
+                Allow also to see previous transaction, with who<br/>
+                why and how much
+            </th>
+            <th style="width: 266px ; text-align:center; color: white ; border:1px solid black ;">
+                Profil <br/><br/>
+                Allow to link a bank account<br/>
+                Add money from your bank account<br/>
+                Add money to your bank account<br/><br/>
+
+                See mail, first name and last name<br/><br/>
+
+                List of friend and add friend
+            </th>
+            <th style="width: 266px ; text-align:center; color: white ; border:1px solid black;">
+                Contact <br/><br/>
+                Allows to contact the support of pay my buddy
+            </th>
+        </tr>
+
+    </table>
+</div>
+
 </body>
 </html>

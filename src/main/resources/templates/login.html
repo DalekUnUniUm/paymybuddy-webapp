@@ -9,12 +9,12 @@
           crossorigin="anonymous" />
 </head>
 <body>
-<div class="border border-secondary p-3 rounded" style="max-width: 410px; margin: 0 auto ;">
+<div class="border border-secondary p-3 rounded" style="max-width: 350px; position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
     <div class="container-fluid text-center">
         <div>
-            <img class="img-fluid" th:src="@{/images/paymuddyloginlogo.png}" />
+            <img class="img-fluid" th:src="@{/images/paymuddylogoheader.png}" />
         </div>
-        <span th:if="${logError != null}" class="error" style="color: RED ;">Mauvaise combinaison d'email et de mot de passe</span>
+        <span th:if="${logError != null}" class="error" style="color: RED ;">Wrong email or password</span>
         <form method="post" th:action="@{/login}" th:object="${utilisateur}" style="margin-top:10px ;">
             <p>
                 <input type="email" placeholder="E-mail" required autofocus th:field="*{mail}">
@@ -23,7 +23,13 @@
                 <input type="password" placeholder="Password" required th:field="*{password}">
             </p>
             <p>
-                <button type="submit" >Se connecter</button>
+                <input type="checkbox" name="rememberme" th:checked="${rememberMe}" > Remember me
+            </p>
+            <p>
+                Not sign up yet ? Create a account <a href="register">here</a>
+            </p>
+            <p>
+                <button type="submit" >Log in</button>
             </p>
         </form>
     </div>

@@ -19,4 +19,23 @@ public class PorteMonnaieService {
         return savedPorteMonnaie ;
     }
 
+    public String getBankAccount(int utilisateurSoldesId){
+        return porteMonnaieProxy.getBankAccount(utilisateurSoldesId);
+    }
+
+    public void updateBankAccount(String bankAccount, int utilisateurSoldesId){
+        porteMonnaieProxy.updateBankAccount(bankAccount,utilisateurSoldesId);
+    }
+    public String mySolde(int utilisateurId){
+        return porteMonnaieProxy.mySolde(utilisateurId);
+    }
+
+    public void addSoldes(int sommes, int utilisateurSoldesId){
+        porteMonnaieProxy.addSoldes(sommes, utilisateurSoldesId);
+    }
+
+    public void soustractSoldes(int sommes, int utilisateurSoldesId){
+        porteMonnaieProxy.soustractSoldes(sommes, utilisateurSoldesId);
+    }
+
 }
